@@ -13,14 +13,17 @@ $antal = Read-host " "
     #Name
     $fornavn = $fornavne.Split([Environment]::NewLine) | Get-Random
     $efternavn = $efternavne.Split([Environment]::NewLine) | Get-Random
-    write-host "Navn:`t" $fornavn $efternavn
-
     #Username
-    $part1 = $fornavn.Substring(0,3).toLower().replace("ø","o").replace("æ","a").replace("å","a")
-    $part2 = $efternavn.Substring(0,3).toLower().replace("ø","o").replace("æ","a").replace("å","a")
+    $part1 = $fornavn.Substring(0,3).toLower().replace("Ã¸","o").replace("Ã¦","a").replace("Ã¥","a")
+    $part2 = $efternavn.Substring(0,3).toLower().replace("Ã¸","o").replace("Ã¦","a").replace("Ã¥","a")
     $part3 = "01"
     $part4 = "@god.rm.dk"
-    Write-Host "AD:`t`t" $part1$part2$part3$part4
+    $navn = "$fornavn $efternavn"
+    $username = $part1+$part2+$part3
+    $email = $part1+$part2+$part3+$part4
+    Write-Host "Navn:`t" $navn
+    Write-Host "username:`t" $username
+    Write-Host "email:`t" $email
     "";
 
 }
