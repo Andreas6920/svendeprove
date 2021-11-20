@@ -20,5 +20,5 @@ Røntgenafdelingen = Roentgen
 Urinvejskirurgisk Afdeling = Urinvejskirurgisk
 Øjenafdelingen = Oejen
 Øre-Næse-Hals Afdelingerne = OereNaese-Halserne 
-IOT
-Printer
+Internet of Things = IoT
+Printer = Printer
