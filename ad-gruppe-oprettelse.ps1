@@ -1,10 +1,19 @@
 cls
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+
+
+
+
+#OU Oprettelse
+$ou = (invoke-webrequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/afdelinger.txt").content
+
+
+
+
+
+#Bruger oprettelse
 $fornavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/fornavne.txt").content
 $Efternavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/efternavne.txt").content
-
-
-
 
 Write-host "antal" -NoNewline
 $antal = Read-host " "
@@ -14,8 +23,8 @@ $antal = Read-host " "
     $fornavn = $fornavne.Split([Environment]::NewLine) | Get-Random
     $efternavn = $efternavne.Split([Environment]::NewLine) | Get-Random
     #Username
-    $part1 = $fornavn.Substring(0,3).toLower().replace("æ¸","a").replace("ø","o").replace("å","a")
-    $part2 = $efternavn.Substring(0,3).toLower().replace("æ¸","a").replace("ø","o").replace("å","a")
+    $part1 = $fornavn.Substring(0,3).toLower().replace("æ","a").replace("ø","o").replace("å","a")
+    $part2 = $efternavn.Substring(0,3).toLower().replace("æ","a").replace("ø","o").replace("å","a")
     $part3 = 1
     $part4 = "@god.rm.dk"
     $navn = "$fornavn $efternavn"
