@@ -41,10 +41,10 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
         -Department Warehouse `
         -Title Stock Worker `
         -Name JUME `
-        -UserPrincipalName JUME@aplast3d.com `
-        -DisplayName Juan Mendoza `
-        -GivenName Juan `
-        -Surname Mendoza `
+        -UserPrincipalName $email `
+        -DisplayName $navn `
+        -GivenName $fornavn `
+        -Surname $efternavn `
         -AccountPassword (ConvertTo-SecureString "Pa55w.rd" -AsPlainText -Force) -PassThru| Enable-ADAccount
         
         Write-host `t`t`t"BRUGER: "$firstname $lastname "oprettes.." -f yellow
@@ -52,7 +52,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
         #Change password at logon
         #Set-ADUser -Identity <samAccountName> -ChangePasswordAtLogon $true
 
-}
+                }
 
 
 
@@ -60,6 +60,6 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 
 
     
-     }
+     
 
 # Security Group oprettelse
