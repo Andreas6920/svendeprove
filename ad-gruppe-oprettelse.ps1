@@ -5,6 +5,12 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 
 # Opret OU
  # New-ADOrganizationalUnit -Name Users -Path OU=UK,DC=aplast3d,DC=com -ProtectedFromAccidentalDeletion $False
+ New-ADOrganizationalUnit -Name "HEV" -Path "DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+ New-ADOrganizationalUnit -Name "Users" -Path "OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+ New-ADOrganizationalUnit -Name "Departments" -Path "OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+    New-ADOrganizationalUnit -Name "Hospitalsledelsen" -Path "OU=Departments,OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+    New-ADOrganizationalUnit -Name "Staben" -Path "OU=Departments,OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+    New-ADOrganizationalUnit -Name "Akut" -Path "OU=Departments,OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
 
 
 
@@ -24,7 +30,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
         $efternavn = $efternavne.Split([Environment]::NewLine) | Get-Random
         $navn = "$fornavn $efternavn"
         #Username
-        $part1 = $fornavn.Substring(0,3).toLower().replace("æ","a").replace("ø","o").replace("å","a")+$efternavn.Substring(0,3).toLower().replace("æ","a").replace("ø","o").replace("å","a")
+        $part1 = $fornavn.Substring(0,3).toLower().replace("Ã¦","a").replace("Ã¸","o").replace("Ã¥","a")+$efternavn.Substring(0,3).toLower().replace("Ã¦","a").replace("Ã¸","o").replace("Ã¥","a")
         $part2 = 1
         #email
         $part4 = "@god.rm.dk"
@@ -37,7 +43,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 
         New-ADUser `
         -Path OU=Users,OU=UK,DC=aplast3d,DC=com `
-        -Office Gødstrup Sygehus `
+        -Office GÃ¸dstrup Sygehus `
         -Department Warehouse `
         -Title Stock Worker `
         -Name JUME `
