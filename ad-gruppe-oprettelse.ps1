@@ -1,66 +1,32 @@
-cls
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 
+if(!((Get-ADOrganizationalUnit -Filter *).Name -Match "Departments")){
+    New-ADOrganizationalUnit -Name "HEV" -Path "DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+    New-ADOrganizationalUnit -Name "Users" -Path "OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+        New-ADOrganizationalUnit -Name "Departments" -Path "OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+    New-ADOrganizationalUnit -Name "Computers" -Path "OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+        New-ADOrganizationalUnit -Name "Service Accounts" -Path "OU=Computers,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False    
+        New-ADOrganizationalUnit -Name "Departmens" -Path "OU=Computers,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
+}
 
-
-# Opret OU
- # New-ADOrganizationalUnit -Name Users -Path OU=UK,DC=aplast3d,DC=com -ProtectedFromAccidentalDeletion $False
- New-ADOrganizationalUnit -Name "HEV" -Path "DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
- New-ADOrganizationalUnit -Name "Users" -Path "OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
- New-ADOrganizationalUnit -Name "Departments" -Path "OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
-    New-ADOrganizationalUnit -Name "Hospitalsledelsen" -Path "OU=Departments,OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
-    New-ADOrganizationalUnit -Name "Staben" -Path "OU=Departments,OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
-    New-ADOrganizationalUnit -Name "Akut" -Path "OU=Departments,OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False
-
-
-
-# Bruger Oprettelse
-    $ou = (invoke-webrequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/afdelinger.txt").content
-        
-    #Bruger oprettelse
-    $fornavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/fornavne.txt").content
-    $Efternavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/efternavne.txt").content
-
-    Write-host "antal" -NoNewline
-    $antal = Read-host " "
-
-    1..$antal | % {
-        #Name
-        $fornavn = $fornavne.Split([Environment]::NewLine) | Get-Random
-        $efternavn = $efternavne.Split([Environment]::NewLine) | Get-Random
-        $navn = "$fornavn $efternavn"
-        #Username
-        $part1 = $fornavn.Substring(0,3).toLower().replace("æ","a").replace("ø","o").replace("å","a")+$efternavn.Substring(0,3).toLower().replace("æ","a").replace("ø","o").replace("å","a")
-        $part2 = 1
-        #email
-        $part4 = "@god.rm.dk"
-        $email = $part1+$part2+$part4
+mkdir c:\csvfile -force | Out-Null
+Invoke-WebRequest https://transfer.sh/T5Q4Fw/bruger-test.csv -OutFile C:\csvfile\adusers.csv
+$users = Import-Csv -Delimiter ";" -Path C:\csvfile\adusers.csv
+foreach($user in $users)
+    {
     
-        if(!(get-aduser -Filter 'Name -like "$part1*"')){$part2="0"+$part2}
-        else {$part2=1+(get-aduser -Filter 'Name -like "$part1*"').Name.Count;}
-        if($part2 -lt 10){$part2="0"+$part2}
-        $username = $part1+$part2
+    $firstname = $user.firstname
+    $lastname = $user.lastname
+    $afdeling = $user.Department 
 
-        New-ADUser `
-        -Path OU=Users,OU=UK,DC=aplast3d,DC=com `
-        -Office Gødstrup Sygehus `
-        -Department Warehouse `
-        -Title Stock Worker `
-        -Name JUME `
-        -UserPrincipalName $email `
-        -DisplayName $navn `
-        -GivenName $fornavn `
-        -Surname $efternavn `
-        -AccountPassword (ConvertTo-SecureString "Pa55w.rd" -AsPlainText -Force) -PassThru| Enable-ADAccount
-        
-        Write-host `t`t`t"BRUGER: "$firstname $lastname "oprettes.." -f yellow
+    #opret OU
+    if(!(Get-ADOrganizationalUnit -LDAPFilter '(name=$afdeling)' -SearchBase "OU=Departments,OU=Users,OU=HEV,DC=hev,DC=rm,DC=local" -SearchScope OneLevel))
+    {New-ADOrganizationalUnit -Name $afdeling -Path "OU=Users,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False }
+    #if(!(Get-ADOrganizationalUnit -LDAPFilter '(name=$afdeling)' -SearchBase "OU=Departments,OU=Computers,OU=HEV,DC=hev,DC=rm,DC=local" -SearchScope OneLevel))
+    #{New-ADOrganizationalUnit -Name $afdeling -Path "OU=Computers,OU=HEV,DC=HEV,DC=RM,DC=LOCAL" -ProtectedFromAccidentalDeletion $False }
+ 
+    }
 
-        #Change password at logon
-        #Set-ADUser -Identity <samAccountName> -ChangePasswordAtLogon $true
-
-                }
-
-
+    
 
 
 
