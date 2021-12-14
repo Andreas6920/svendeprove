@@ -153,16 +153,21 @@ $appheader =
             } #klient funcktion slut
 
 function Serverautomatisering{
+    #Downloader script
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/powershellscripts/serverautomatisering.ps1" -OutFile $script
+
+    #CSV fil
     Do {
         Write-Host "question? (y/n)" -nonewline;
         $answer = Read-Host " " 
             Switch ($Answer) { 
                Y {
-                    #downloader template
+                    #Downloader template
                         If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main")) {
                         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Force | Out-Null}
                         Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 1
                         $csv = "$($env:userprofile)\Desktop\bruger.csv"
+                        if(test-path $csv){Remove-item $csv -Force}
                         Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/bruger-template.csv" -OutFile $csv
                 
                     #CSV håndtering
@@ -175,13 +180,12 @@ function Serverautomatisering{
                         $afdeling = Read-host " "
                         cls
                         1..$antal | % {
-                        #værdier
+                        #Værdier
                         $fornavn = $fornavne.Split([Environment]::NewLine) | Get-Random
                         $efternavn = $efternavne.Split([Environment]::NewLine) | Get-Random
                         $stilling = "Sygeplejeske", "Læge" | Get-Random
                         $value = $fornavn+";"+$efternavn+";"+$stilling+";"+$afdeling
-                        
-                        # Write-host $value
+                        #Tilføj værdier til template
                         Add-Content -Encoding UTF8 -value $value -path $csv
                     }
                         # Uploader fil
@@ -193,7 +197,16 @@ function Serverautomatisering{
                         if($link -match ".ps1$")
                             {write-host "script execution:`tiex ((New-Object System.Net.WebClient).DownloadString('$link'))"}
                         }
-                        Start-Sleep -s 3; upload $} 
+                        Start-Sleep -s 3; upload $csv; Start-slepp -s2
+                        # Vis CSV
+                            Do {
+                                Write-Host "Vil du se CSV filen? (y/n)" -nonewline;
+                                $Readhost = Read-Host " " 
+                                    Switch ($ReadHost) { 
+                                    Y {Start $csv} 
+                                    N {} 
+                            } } While($Readhost -notin "y", "n")
+                    } 
                 N {
                     # Indtast CSV fil direkte link 
                     Write-Host "Please enter the link to csv file:" -nonewline;
@@ -203,6 +216,7 @@ function Serverautomatisering{
                     }}}
                     While($Answer -notin "y", "n")
     
+    Write-host
 }
         
 
