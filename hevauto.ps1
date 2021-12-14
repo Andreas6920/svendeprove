@@ -5,7 +5,7 @@ mkdir "C:\ProgramData\Ansible\templates\" -ErrorAction Ignore
 mkdir "C:\ProgramData\Ansible\scripts\files" -ErrorAction Ignore
 remove-item -Path C:\ProgramData\Ansible\scripts\files\* -recurse -force
 
-$file = "C:\ProgramData\Ansible\script\files\script.ps1"; $folder = Split-Path $file
+$file = "C:\ProgramData\Ansible\scripts\files\script.ps1"; $folder = Split-Path $file
 mkdir $folder -ErrorAction Ignore | out-null; New-item $file -Force | Out-Null
 
 
