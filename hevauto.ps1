@@ -6,6 +6,10 @@
     mkdir "C:\ProgramData\Ansible\scripts\files" -ErrorAction Ignore | Out-Null
     remove-item -Path C:\ProgramData\Ansible\scripts\files\* -recurse -force
 
+#Download mulighed
+    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main")) {
+        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Force | Out-Null}
+        Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize"  -Value 2
 #Script
     $file = "C:\ProgramData\Ansible\scripts\files\script.ps1"; $folder = Split-Path $file
     New-item $file -Force | Out-Null
@@ -186,12 +190,9 @@ if ($admin_permissions_check) {
         Switch ($option) { 
             0 { exit }
             1 { klientautomatisering; }
-            2 { remove_bloatware }
-            3 { settings_privacy }
-            4 { settings_customize }
-            5 { app_installer }
-            Default { cls; Write-host""; Write-host""; Write-host "INVALID OPTION. TRY AGAIN.." -f red; Write-host""; Write-host""; Start-Sleep 1; cls; Write-host ""; Write-host "" } 
-        }
+            2 { Serverautomatisering; }
+            3 { Netværksautomatisering; }
+            Default { cls; Write-host""; Write-host""; Write-host "INVALID OPTION. TRY AGAIN.." -f red; Write-host""; Write-host""; Start-Sleep 1; cls; Write-host ""; Write-host "" } }
          
         }while ($option -le 3 )
      
