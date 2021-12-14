@@ -143,7 +143,7 @@ $appheader =
 
             write-host "eksekverer ansible script"
             sleep -s 5
-            wsl ansible all win_ping
+            wsl ansible all -m win_ping
             sleep -s 5
             } #klient funcktion slut
 
