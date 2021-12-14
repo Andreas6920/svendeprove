@@ -1,10 +1,9 @@
 ﻿
 # Bruger Oprettelse
-    $ou = (invoke-webrequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/afdelinger.txt").content
         
     #Bruger oprettelse
-    $fornavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/fornavne.txt").content
-    $Efternavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/efternavne.txt").content
+    $fornavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/fornavne.txt").content
+    $Efternavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/efternavne.txt").content
 
     Write-host "antal" -NoNewline
     $antal = Read-host " "
