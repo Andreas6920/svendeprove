@@ -133,7 +133,7 @@ $appheader =
             }} While ($answer -notin "y", "n") 
 
 
-            exit
+            write-host "eksekverer ansible script"
             sleep -s 5
             wsl ansible all win_ping
             
