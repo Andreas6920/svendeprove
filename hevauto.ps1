@@ -11,8 +11,8 @@
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Force | Out-Null}
         Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize"  -Value 1
 #Script
-    $file = "C:\ProgramData\Ansible\scripts\files\script.ps1"; $folder = Split-Path $file
-    New-item $file -Force | Out-Null
+    $script = "C:\ProgramData\Ansible\scripts\files\script.ps1"; $folder = Split-Path $script
+    New-item $script -Force | Out-Null
 
 
 
@@ -23,8 +23,8 @@ Do {
         Switch ($answer) { 
     Y {
 
-echo "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" >> $file
-echo "Sleep -s 3" >> $file;
+echo "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" >> $script
+echo "Start-Sleep -s 3" >> $script;
 
 $appheader = 
 "
@@ -70,56 +70,56 @@ $appheader =
             foreach ($requested_app in $requested_apps) {
 
             if("cancel" -eq "$requested_app"){Write-Output "Quitting.."}
-            elseif("Firefox" -match "$requested_app"){Write-host "`t`t`t`t- adding firefox.." -f yellow; sleep -s 1; echo 'choco install firefox -y' >> $file}
-            elseif("Chrome" -match "$requested_app"){Write-host "`t`t`t`t- adding Chrome.." -f yellow; sleep -s 1; echo 'choco install googlechrome -y' >> $file;} 
-            elseif("Brave" -match "$requested_app"){Write-host "`t`t`t`t- adding Brave.." -f yellow; sleep -s 1; echo 'choco install Brave -y ' >> $file;} 
-            elseif("Opera" -match "$requested_app"){Write-host "`t`t`t`t- adding Opera.." -f yellow; sleep -s 1; echo 'choco install opera -y' >> $file;} 
-            elseif("Vivaldi" -match "$requested_app"){Write-host "`t`t`t`t- adding Vivaldi.." -f yellow; sleep -s 1; echo 'choco install Vivaldi -y' >> $file;} 
+            elseif("Firefox" -match "$requested_app"){Write-host "`t`t`t`t- adding firefox.." -f yellow; Start-Sleep -s 1; echo 'choco install firefox -y' >> $script}
+            elseif("Chrome" -match "$requested_app"){Write-host "`t`t`t`t- adding Chrome.." -f yellow; Start-Sleep -s 1; echo 'choco install googlechrome -y' >> $script;} 
+            elseif("Brave" -match "$requested_app"){Write-host "`t`t`t`t- adding Brave.." -f yellow; Start-Sleep -s 1; echo 'choco install Brave -y ' >> $script;} 
+            elseif("Opera" -match "$requested_app"){Write-host "`t`t`t`t- adding Opera.." -f yellow; Start-Sleep -s 1; echo 'choco install opera -y' >> $script;} 
+            elseif("Vivaldi" -match "$requested_app"){Write-host "`t`t`t`t- adding Vivaldi.." -f yellow; Start-Sleep -s 1; echo 'choco install Vivaldi -y' >> $script;} 
 
-            elseif("Dropbox" -match "$requested_app"){Write-host "`t`t`t`t- adding Dropbox.." -f yellow; sleep -s 1; echo 'choco install dropbox -y' >> $file;} 
-            elseif("Google Drive" -match "$requested_app"){Write-host "`t`t`t`t- adding Google Drive.." -f yellow; sleep -s 1; echo 'choco install googledrive -y' >> $file;} 
-            elseif("TeamViewer" -match "$requested_app"){Write-host "`t`t`t`t- adding TeamViewer.." -f yellow; sleep -s 1;echo 'choco install TeamViewer -y' >> $file;} 
-            elseif("7-zip" -match "$requested_app"){Write-host "`t`t`t`t- adding 7-Zip.." -f yellow; sleep -s 1; echo 'choco install 7Zip -y' >> $file;} 
-            elseif("winrar" -match "$requested_app"){Write-host "`t`t`t`t- adding Winrar.." -f yellow; sleep -s 1; echo 'choco install winrar -y' >> $file;} 
-            elseif("Greenshot" -match "$requested_app"){Write-host "`t`t`t`t- adding Greenshot.." -f yellow; sleep -s 1; echo 'choco install Greenshot -y' >> $file;} 
-            elseif("ShareX" -match "$requested_app"){Write-host "`t`t`t`t- adding Sharex.." -f yellow; sleep -s 1; echo 'choco install Sharex -y' >> $file;} 
-            elseif("Gimp" -match "$requested_app"){Write-host "`t`t`t`t- adding Gimp.." -f yellow; sleep -s 1; echo 'choco install Gimp -y' >> $file;} 
-            elseif("Visual studio++" -match "$requested_app"){Write-host "`t`t`t`t- adding Visual studio++.." -f yellow; sleep -s 1; echo 'choco install vcredist140 -y' >> $file;} 
+            elseif("Dropbox" -match "$requested_app"){Write-host "`t`t`t`t- adding Dropbox.." -f yellow; Start-Sleep -s 1; echo 'choco install dropbox -y' >> $script;} 
+            elseif("Google Drive" -match "$requested_app"){Write-host "`t`t`t`t- adding Google Drive.." -f yellow; Start-Sleep -s 1; echo 'choco install googledrive -y' >> $script;} 
+            elseif("TeamViewer" -match "$requested_app"){Write-host "`t`t`t`t- adding TeamViewer.." -f yellow; Start-Sleep -s 1;echo 'choco install TeamViewer -y' >> $script;} 
+            elseif("7-zip" -match "$requested_app"){Write-host "`t`t`t`t- adding 7-Zip.." -f yellow; Start-Sleep -s 1; echo 'choco install 7Zip -y' >> $script;} 
+            elseif("winrar" -match "$requested_app"){Write-host "`t`t`t`t- adding Winrar.." -f yellow; Start-Sleep -s 1; echo 'choco install winrar -y' >> $script;} 
+            elseif("Greenshot" -match "$requested_app"){Write-host "`t`t`t`t- adding Greenshot.." -f yellow; Start-Sleep -s 1; echo 'choco install Greenshot -y' >> $script;} 
+            elseif("ShareX" -match "$requested_app"){Write-host "`t`t`t`t- adding Sharex.." -f yellow; Start-Sleep -s 1; echo 'choco install Sharex -y' >> $script;} 
+            elseif("Gimp" -match "$requested_app"){Write-host "`t`t`t`t- adding Gimp.." -f yellow; Start-Sleep -s 1; echo 'choco install Gimp -y' >> $script;} 
+            elseif("Visual studio++" -match "$requested_app"){Write-host "`t`t`t`t- adding Visual studio++.." -f yellow; Start-Sleep -s 1; echo 'choco install vcredist140 -y' >> $script;} 
             
-            elseif("spotify" -match "$requested_app"){Write-host "`t`t`t`t- adding spotify.." -f yellow; sleep -s 1; echo 'choco install spotify -y' >> $file;}  
-            elseif("VLC" -match "$requested_app"){Write-host "`t`t`t`t- adding VLC.." -f yellow; sleep -s 1; echo 'choco install VLC -y' >> $file;}  
-            elseif("itunes" -match "$requested_app"){Write-host "`t`t`t`t- adding itunes.." -f yellow; sleep -s 1; echo 'choco install itunes -y' >> $file;}  
-            elseif("Winamp" -match "$requested_app"){Write-host "`t`t`t`t- adding Winamp.." -f yellow; sleep -s 1; echo 'choco install Winamp -y' >> $file;}  
-            elseif("foobar2000" -match "$requested_app"){Write-host "`t`t`t`t- adding foobar2000.." -f yellow; sleep -s 1; echo 'choco install foobar2000 -y' >> $file;}  
-            elseif("K-lite" -match "$requested_app"){Write-host "`t`t`t`t- adding K-Lite.." -f yellow; sleep -s 1; echo 'choco install k-litecodecpackfull -y' >> $file;}  
-            elseif("MPC-HC" -match "$requested_app"){Write-host "`t`t`t`t- adding MPC-HC.." -f yellow; sleep -s 1; echo 'choco install MPC-HC -y' >> $file;}  
-            elseif("popcorn" -match "$requested_app"){Write-host "`t`t`t`t- adding Popcorntime.." -f yellow; sleep -s 1; echo 'choco install popcorntime -y' >> $file;}  
+            elseif("spotify" -match "$requested_app"){Write-host "`t`t`t`t- adding spotify.." -f yellow; Start-Sleep -s 1; echo 'choco install spotify -y' >> $script;}  
+            elseif("VLC" -match "$requested_app"){Write-host "`t`t`t`t- adding VLC.." -f yellow; Start-Sleep -s 1; echo 'choco install VLC -y' >> $script;}  
+            elseif("itunes" -match "$requested_app"){Write-host "`t`t`t`t- adding itunes.." -f yellow; Start-Sleep -s 1; echo 'choco install itunes -y' >> $script;}  
+            elseif("Winamp" -match "$requested_app"){Write-host "`t`t`t`t- adding Winamp.." -f yellow; Start-Sleep -s 1; echo 'choco install Winamp -y' >> $script;}  
+            elseif("foobar2000" -match "$requested_app"){Write-host "`t`t`t`t- adding foobar2000.." -f yellow; Start-Sleep -s 1; echo 'choco install foobar2000 -y' >> $script;}  
+            elseif("K-lite" -match "$requested_app"){Write-host "`t`t`t`t- adding K-Lite.." -f yellow; Start-Sleep -s 1; echo 'choco install k-litecodecpackfull -y' >> $script;}  
+            elseif("MPC-HC" -match "$requested_app"){Write-host "`t`t`t`t- adding MPC-HC.." -f yellow; Start-Sleep -s 1; echo 'choco install MPC-HC -y' >> $script;}  
+            elseif("popcorn" -match "$requested_app"){Write-host "`t`t`t`t- adding Popcorntime.." -f yellow; Start-Sleep -s 1; echo 'choco install popcorntime -y' >> $script;}  
             
-            elseif("notepad++" -match "$requested_app"){Write-host "`t`t`t`t- adding Notepad++.." -f yellow; sleep -s 1; echo 'choco install notepadplusplus -y' >> $file;}  
-            elseif("vscode" -match "$requested_app"){Write-host "`t`t`t`t- adding vscode.." -f yellow; sleep -s 1; echo 'choco install vscode -y' >> $file;}  
-            elseif("atom" -match "$requested_app"){Write-host "`t`t`t`t- adding atom.." -f yellow; sleep -s 1; echo 'choco install atom -y' >> $file;}  
-            elseif("vim" -match "$requested_app"){Write-host "`t`t`t`t- adding vim.." -f yellow; sleep -s 1; echo 'choco install vim -y' >> $file;} 
-            elseif("Eclipse" -match "$requested_app"){Write-host "`t`t`t`t- adding Eclipse.." -f yellow; sleep -s 1; echo 'choco install Eclipse -y' >> $file;} 
-            elseif("PyCharm" -match "$requested_app"){Write-host "`t`t`t`t- adding PyCharm.." -f yellow; sleep -s 1; echo 'choco install PyCharm -y' >> $file;} 
-            elseif("putty" -match "$requested_app"){Write-host "`t`t`t`t- adding putty.." -f yellow; sleep -s 1; echo 'choco install PyCharm -y' >> $file;} 
-            elseif("superputty" -match "$requested_app"){Write-host "`t`t`t`t- adding superputty.." -f yellow; sleep -s 1; echo 'choco install superputty -y' >> $file;} 
-            elseif("teraterm" -match "$requested_app"){Write-host "`t`t`t`t- adding teraterm.." -f yellow; sleep -s 1; echo 'choco install teraterm -y' >> $file;} 
-            elseif("Filezilla" -match "$requested_app"){Write-host "`t`t`t`t- adding Filezilla.." -f yellow; sleep -s 1; echo 'choco install Filezilla -y' >> $file;} 
-            elseif("WinSCP" -match "$requested_app"){Write-host "`t`t`t`t- adding WinSCP.." -f yellow; sleep -s 1; echo 'choco install WinSCP -y' >> $file;} 
-            elseif("mremoteng" -match "$requested_app"){Write-host "`t`t`t`t- adding MRemoteNG.." -f yellow; sleep -s 1; echo 'choco install mremoteng -y' >> $file;} 
-            elseif("wireshark" -match "$requested_app"){Write-host "`t`t`t`t- adding Wireshark.." -f yellow; sleep -s 1; echo 'choco install wireshark -y' >> $file;} 
-            elseif("git" -match "$requested_app"){Write-host "`t`t`t`t- adding git.." -f yellow; sleep -s 1; echo 'choco install git.install -y' >> $file;}
-            elseif("GithubDesktop" -match "$requested_app"){Write-host "`t`t`t`t- adding Github Desktop.." -f yellow; sleep -s 1; echo 'choco install github-desktop -y' >> $file;}
+            elseif("notepad++" -match "$requested_app"){Write-host "`t`t`t`t- adding Notepad++.." -f yellow; Start-Sleep -s 1; echo 'choco install notepadplusplus -y' >> $script;}  
+            elseif("vscode" -match "$requested_app"){Write-host "`t`t`t`t- adding vscode.." -f yellow; Start-Sleep -s 1; echo 'choco install vscode -y' >> $script;}  
+            elseif("atom" -match "$requested_app"){Write-host "`t`t`t`t- adding atom.." -f yellow; Start-Sleep -s 1; echo 'choco install atom -y' >> $script;}  
+            elseif("vim" -match "$requested_app"){Write-host "`t`t`t`t- adding vim.." -f yellow; Start-Sleep -s 1; echo 'choco install vim -y' >> $script;} 
+            elseif("Eclipse" -match "$requested_app"){Write-host "`t`t`t`t- adding Eclipse.." -f yellow; Start-Sleep -s 1; echo 'choco install Eclipse -y' >> $script;} 
+            elseif("PyCharm" -match "$requested_app"){Write-host "`t`t`t`t- adding PyCharm.." -f yellow; Start-Sleep -s 1; echo 'choco install PyCharm -y' >> $script;} 
+            elseif("putty" -match "$requested_app"){Write-host "`t`t`t`t- adding putty.." -f yellow; Start-Sleep -s 1; echo 'choco install PyCharm -y' >> $script;} 
+            elseif("superputty" -match "$requested_app"){Write-host "`t`t`t`t- adding superputty.." -f yellow; Start-Sleep -s 1; echo 'choco install superputty -y' >> $script;} 
+            elseif("teraterm" -match "$requested_app"){Write-host "`t`t`t`t- adding teraterm.." -f yellow; Start-Sleep -s 1; echo 'choco install teraterm -y' >> $script;} 
+            elseif("Filezilla" -match "$requested_app"){Write-host "`t`t`t`t- adding Filezilla.." -f yellow; Start-Sleep -s 1; echo 'choco install Filezilla -y' >> $script;} 
+            elseif("WinSCP" -match "$requested_app"){Write-host "`t`t`t`t- adding WinSCP.." -f yellow; Start-Sleep -s 1; echo 'choco install WinSCP -y' >> $script;} 
+            elseif("mremoteng" -match "$requested_app"){Write-host "`t`t`t`t- adding MRemoteNG.." -f yellow; Start-Sleep -s 1; echo 'choco install mremoteng -y' >> $script;} 
+            elseif("wireshark" -match "$requested_app"){Write-host "`t`t`t`t- adding Wireshark.." -f yellow; Start-Sleep -s 1; echo 'choco install wireshark -y' >> $script;} 
+            elseif("git" -match "$requested_app"){Write-host "`t`t`t`t- adding git.." -f yellow; Start-Sleep -s 1; echo 'choco install git.install -y' >> $script;}
+            elseif("GithubDesktop" -match "$requested_app"){Write-host "`t`t`t`t- adding Github Desktop.." -f yellow; Start-Sleep -s 1; echo 'choco install github-desktop -y' >> $script;}
 
-            elseif("Microsoft Teams" -match "$requested_app"){Write-host "`t`t`t`t- adding Microsoft Teams.." -f yellow; sleep -s 1; echo 'choco install microsoft-teams -y' >> $file;} 
-            elseif("Zoom" -match "$requested_app"){Write-host "`t`t`t`t- adding Zoom.." -f yellow; sleep -s 1; echo 'choco install Zoom -y' >> $file;} 
-            elseif("Webex" -match "$requested_app"){Write-host "`t`t`t`t- adding Webex.." -f yellow; sleep -s 1; echo 'choco install webex-teams -y' >> $file;}
-            elseif("Discord" -match "$requested_app"){Write-host "`t`t`t`t- adding Discord.." -f yellow; sleep -s 1; echo 'choco install Discord -y' >> $file;}
-            elseif("Twitch" -match "$requested_app"){Write-host "`t`t`t`t- adding Twitch.." -f yellow; sleep -s 1; echo 'choco install Twitch -y' >> $file;}
-            elseif("Steam" -match "$requested_app"){Write-host "`t`t`t`t- adding Steam.." -f yellow; sleep -s 1; echo 'choco install Steam -y' >> $file;}
-            elseif("Ubisoft Connect" -match "$requested_app"){Write-host "`t`t`t`t- adding Ubisoft Connect.." -f yellow; sleep -s 1; echo 'choco install ubisoft-connect -y' >> $file;}}
+            elseif("Microsoft Teams" -match "$requested_app"){Write-host "`t`t`t`t- adding Microsoft Teams.." -f yellow; Start-Sleep -s 1; echo 'choco install microsoft-teams -y' >> $script;} 
+            elseif("Zoom" -match "$requested_app"){Write-host "`t`t`t`t- adding Zoom.." -f yellow; Start-Sleep -s 1; echo 'choco install Zoom -y' >> $script;} 
+            elseif("Webex" -match "$requested_app"){Write-host "`t`t`t`t- adding Webex.." -f yellow; Start-Sleep -s 1; echo 'choco install webex-teams -y' >> $script;}
+            elseif("Discord" -match "$requested_app"){Write-host "`t`t`t`t- adding Discord.." -f yellow; Start-Sleep -s 1; echo 'choco install Discord -y' >> $script;}
+            elseif("Twitch" -match "$requested_app"){Write-host "`t`t`t`t- adding Twitch.." -f yellow; Start-Sleep -s 1; echo 'choco install Twitch -y' >> $script;}
+            elseif("Steam" -match "$requested_app"){Write-host "`t`t`t`t- adding Steam.." -f yellow; Start-Sleep -s 1; echo 'choco install Steam -y' >> $script;}
+            elseif("Ubisoft Connect" -match "$requested_app"){Write-host "`t`t`t`t- adding Ubisoft Connect.." -f yellow; Start-Sleep -s 1; echo 'choco install ubisoft-connect -y' >> $script;}}
             Write-host "`t`t`t`t- Alle applikationer er nu tilføjet til scriptet!..`n";
-            sleep -s 3
+            Start-Sleep -s 3
              }
                 
             
@@ -131,7 +131,7 @@ $appheader =
             Write-Host "`t`t`t- Vil du fjerne ikonerne fra startmenuen? (y/n)" -f yellow -nonewline; ;
             $answer = Read-Host " " 
             Switch ($answer) { 
-                Y {Write-Host "`t`t`t`t- Startmenuen bliver unpinned.";echo (Invoke-WebRequest -Uri "https://geany.org/p/rE93R/raw/").Content >> $file; sleep -s 1}
+                Y {Write-Host "`t`t`t`t- Startmenuen bliver unpinned.";echo (Invoke-WebRequest -Uri "https://geany.org/p/rE93R/raw/").Content >> $script; Start-Sleep -s 1}
                 N { Write-Host "NEJ. dette modul bliver skippet" -f Red } 
             }} While ($answer -notin "y", "n") 
          
@@ -140,69 +140,68 @@ $appheader =
             Write-Host "`t`t`t- Vil du fjerne ikonerne fra taskbaren? (y/n)" -f yellow -nonewline; ;
             $answer = Read-Host " " 
             Switch ($answer) { 
-                Y {Write-Host "`t`t`t`t- taskbaren bliver unpinned."; echo (Invoke-WebRequest -Uri "https://geany.org/p/p1ipE/raw/").Content >> $file; sleep -s 1}
+                Y {Write-Host "`t`t`t`t- taskbaren bliver unpinned."; echo (Invoke-WebRequest -Uri "https://geany.org/p/p1ipE/raw/").Content >> $script; Start-Sleep -s 1}
                 N { Write-Host "NEJ. dette modul bliver skippet" -f Red } 
             }} While ($answer -notin "y", "n") 
 
 
             write-host "`t`teksekverer ansible script:"
             write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml"
-            sleep -s 5
+            Start-Sleep -s 5
             wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml
-            sleep -s 5
+            Start-Sleep -s 5
             } #klient funcktion slut
 
 function Serverautomatisering{
-    
-    # Bruger Oprettelse
-    write-host "Downloader script"
-    Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/powershellscripts/serverautomatisering.ps1" -OutFile $file
-    
-
-
-
-            #Download template
-            If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main")) {
-            New-Item -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Force | Out-Null}
-            Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize"  -Value 1
-            $csv = "$($env:userprofile)\Desktop\bruger.csv"
-            Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/bruger-template.csv" -OutFile  $csv
-    
-            #Bruger oprettelse
-            $fornavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/fornavne.txt").content
-            $Efternavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/efternavne.txt").content
-    
-            Write-host "antal" -NoNewline
-            $antal = Read-host " "
-            Write-host "afdeling" -NoNewline
-            $afdeling = Read-host " "
-            cls
-            1..$antal | % {
-            #Name
-            $fornavn = $fornavne.Split([Environment]::NewLine) | Get-Random
-            $efternavn = $efternavne.Split([Environment]::NewLine) | Get-Random
-            $stilling = "Sygeplejeske", "Læge" | Get-Random
-            #Username
-            #email
-            $value = $fornavn+";"+$efternavn+";"+$stilling+";"+$afdeling
-            
-            #write-host $value
-            Write-host "`t`t`t - Tilføjer $fornavn $efternavn -> CSV filen"
-            Add-Content -Encoding UTF8 -value $value -path $csv
-    
-    
-    
-            }
-    
-    function upload ($filename)
-    {$file = Get-Item $filename;
-    $link = (Invoke-WebRequest -Method PUT -InFile $file.FullName -Uri https://transfer.sh/$($file.Name)).Content
-    write "Here's your link:`t$link" 
-    Set-Clipboard -Value $link
-    if($link -match ".ps1$")
-        {write-host "script execution:`tiex ((New-Object System.Net.WebClient).DownloadString('$link'))"}
-    }
-    sleep -s 3; upload $csv
+    Do {
+        Write-Host "question? (y/n)" -nonewline;
+        $answer = Read-Host " " 
+            Switch ($Answer) { 
+               Y {
+                    #downloader template
+                        If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main")) {
+                        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Force | Out-Null}
+                        Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 1
+                        $csv = "$($env:userprofile)\Desktop\bruger.csv"
+                        Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/bruger-template.csv" -OutFile $csv
+                
+                    #CSV håndtering
+                        $fornavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/fornavne.txt").content
+                        $Efternavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/efternavne.txt").content
+                
+                        Write-host "antal" -NoNewline
+                        $antal = Read-host " "
+                        Write-host "afdeling" -NoNewline
+                        $afdeling = Read-host " "
+                        cls
+                        1..$antal | % {
+                        #værdier
+                        $fornavn = $fornavne.Split([Environment]::NewLine) | Get-Random
+                        $efternavn = $efternavne.Split([Environment]::NewLine) | Get-Random
+                        $stilling = "Sygeplejeske", "Læge" | Get-Random
+                        $value = $fornavn+";"+$efternavn+";"+$stilling+";"+$afdeling
+                        
+                        # Write-host $value
+                        Add-Content -Encoding UTF8 -value $value -path $csv
+                    }
+                        # Uploader fil
+                        function upload ($filename)
+                        {$file = Get-Item $filename;
+                        $link = (Invoke-WebRequest -Method PUT -InFile $file.FullName -Uri https://transfer.sh/$($file.Name)).Content
+                        write "Filen er uploaded til sygehusets filserver:`t$link" 
+                        Set-Clipboard -Value $link
+                        if($link -match ".ps1$")
+                            {write-host "script execution:`tiex ((New-Object System.Net.WebClient).DownloadString('$link'))"}
+                        }
+                        Start-Sleep -s 3; upload $} 
+                N {
+                    # Indtast CSV fil direkte link 
+                    Write-Host "Please enter the link to csv file:" -nonewline;
+                    $link = Read-Host " " 
+                    # Downloader CSV fra indtastede link
+                    Invoke-WebRequest -uri $link -OutFile $csv
+                    }}}
+                    While($Answer -notin "y", "n")
     
 }
         
