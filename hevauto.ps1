@@ -141,9 +141,10 @@ $appheader =
             }} While ($answer -notin "y", "n") 
 
 
-            write-host "eksekverer ansible script"
+            write-host "`t`teksekverer ansible script:"
+            write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml"
             sleep -s 5
-            wsl ansible all -m win_ping
+            wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml
             sleep -s 5
             } #klient funcktion slut
 
