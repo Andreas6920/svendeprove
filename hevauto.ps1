@@ -234,10 +234,10 @@ Do {
                 }}}
                 While($Answer -notin "y", "n")
 
-        write-host "`t`teksekverer ansible script:"
-        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml"
+        write-host "`t`teksekverer ansible script:" -f green
+        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml" -f green
         Start-Sleep -s 5
-        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit DC
+        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit dc
         Start-Sleep -s 5
 }
     
