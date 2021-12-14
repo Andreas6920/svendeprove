@@ -1,12 +1,14 @@
 ﻿#prepare system
-mkdir "C:\ProgramData\Ansible" -ErrorAction Ignore
-mkdir "C:\ProgramData\Ansible\scripts\" -ErrorAction Ignore
-mkdir "C:\ProgramData\Ansible\templates\" -ErrorAction Ignore
-mkdir "C:\ProgramData\Ansible\scripts\files" -ErrorAction Ignore
-remove-item -Path C:\ProgramData\Ansible\scripts\files\* -recurse -force
+#folders
+    mkdir "C:\ProgramData\Ansible" -ErrorAction Ignore | Out-Null
+    mkdir "C:\ProgramData\Ansible\scripts\" -ErrorAction Ignore | Out-Null
+    mkdir "C:\ProgramData\Ansible\templates\" -ErrorAction Ignore | Out-Null
+    mkdir "C:\ProgramData\Ansible\scripts\files" -ErrorAction Ignore | Out-Null
+    remove-item -Path C:\ProgramData\Ansible\scripts\files\* -recurse -force
 
-$file = "C:\ProgramData\Ansible\scripts\files\script.ps1"; $folder = Split-Path $file
-mkdir $folder -ErrorAction Ignore | out-null; New-item $file -Force | Out-Null
+#Script
+    $file = "C:\ProgramData\Ansible\scripts\files\script.ps1"; $folder = Split-Path $file
+    New-item $file -Force | Out-Null
 
 
 
