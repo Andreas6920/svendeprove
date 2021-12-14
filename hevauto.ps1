@@ -9,7 +9,7 @@
 #Download mulighed
     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main")) {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Force | Out-Null}
-        Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize"  -Value 2
+        Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize"  -Value 1
 #Script
     $file = "C:\ProgramData\Ansible\scripts\files\script.ps1"; $folder = Split-Path $file
     New-item $file -Force | Out-Null
