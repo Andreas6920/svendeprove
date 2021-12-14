@@ -134,6 +134,7 @@ $appheader =
 
 
             exit
+            sleep -s 5
             wsl ansible all win_ping
             
             } #klient funcktion slut
