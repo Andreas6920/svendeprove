@@ -1,5 +1,11 @@
 ﻿#prepare system
-$file = "C:\ProgramData\Ansible-Scripts\script.ps1"; $folder = Split-Path $file
+mkdir "C:\ProgramData\Ansible"
+mkdir "C:\ProgramData\Ansible\scripts\"
+mkdir "C:\ProgramData\Ansible\templates\"
+mkdir "C:\ProgramData\Ansible\scripts\files"
+remove-item -Path C:\ProgramData\Ansible\script\files\* -recurse -force
+
+$file = "C:\ProgramData\Ansible\script\files\script.ps1"; $folder = Split-Path $file
 mkdir $folder -ErrorAction Ignore | out-null; New-item $file -Force | Out-Null
 
 
