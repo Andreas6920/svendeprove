@@ -133,9 +133,11 @@ $appheader =
             }} While ($answer -notin "y", "n") 
 
 
-
+            exit
+            wsl ansible all win_ping
             
             } #klient funcktion slut
+
 
         
 
