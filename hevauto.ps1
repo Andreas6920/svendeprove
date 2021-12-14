@@ -146,9 +146,9 @@ $appheader =
 
 
         write-host "`t`teksekverer ansible script:"
-        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml"
+        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcakut"
         Start-Sleep -s 5
-        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml
+        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcakut
         Start-Sleep -s 5
         } #klient funcktion slut
 
@@ -235,9 +235,9 @@ Do {
                 While($Answer -notin "y", "n")
 
         write-host "`t`teksekverer ansible script:" -f green
-        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml" -f green
+        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit dc" -f green
         Start-Sleep -s 5
-        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcakut
+        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit dc
         Start-Sleep -s 5
 }
     
