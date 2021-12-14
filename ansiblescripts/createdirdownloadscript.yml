@@ -1,0 +1,13 @@
+---
+- name: Klientautomatisering
+  hosts: all
+  gather_facts: no
+  tasks:
+  - name: Create directory
+    ansible.windows.win_file:
+      path: C:\Programdata\Ansible-scripts
+      state: directory
+  - name: transfering file to dir
+    win_copy:
+      src: "{{ playbook_dir }}/files/script.ps1"
+      dest: C:\Programdata\Ansible-scripts\script.ps1

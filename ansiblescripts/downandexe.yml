@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:
+
+  - name: Run multi-lined shell commands
+    win_shell: |
+        $location = "$($env:systemdrive)\ProgramData\Ansible-scripts"
+        mkdir $location -ea ignore
+	      #   $text = Get-Content C:\Temp\test.txt
+        #   $text += ' General Kenobi....you are a bold one'
+        #   Set-Content -Path C:\Temp\test2.txt -Value $text
+
+  - name: Copy a single file
+    win_copy:
+      src: "{{ playbook_dir }}/files/test.ps1"
+      dest: C:\Temp\Windowsoptimizer.ps1
+
+  - name: Run a script
+    win_command: powershell.exe -ExecutionPolicy ByPass -Windowstyle Normal -File C:/temp/powershellscript.ps1
