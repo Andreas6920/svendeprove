@@ -158,10 +158,12 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Andreas6920/svendeprov
 
 #CSV fil
 Do {
-    Write-Host "question? (y/n)" -nonewline;
+    
+    Write-Host "`t`t`tEr dette et Proof of Concept? (y/n)" -nonewline;
     $answer = Read-Host " " 
         Switch ($Answer) { 
            Y {
+                Write-host "`t`t`t`tBruger-generator påbegyndes..." -f green; Start-Sleep -S 2
                 #Downloader template
                     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main")) {
                     New-Item -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Force | Out-Null}
@@ -174,10 +176,11 @@ Do {
                     $fornavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/fornavne.txt").content
                     $Efternavne = (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/other%20files/efternavne.txt").content
             
-                    Write-host "antal" -NoNewline
+                    Write-host "`t`t`t`t- antal" -NoNewline
                     $antal = Read-host " "
-                    Write-host "afdeling" -NoNewline
+                    Write-host "`t`t`t`t- afdeling" -NoNewline
                     $afdeling = Read-host " "
+                    Write-host "`t`t`t`t- Tilføjer brugere til CSV fil.."
                     1..$antal | % {
                     #Værdier
                     $fornavn = $fornavne.Split([Environment]::NewLine) | Get-Random
@@ -185,28 +188,40 @@ Do {
                     $stilling = "Sygeplejeske", "Læge" | Get-Random
                     $value = $fornavn+";"+$efternavn+";"+$stilling+";"+$afdeling
                     #Tilføj værdier til template
+                    
                     Add-Content -Encoding UTF8 -value $value -path $csv
                 }
                     # Uploader fil
+                    
                     function upload ($filename)
-                    {$file = Get-Item $filename;
+                    {
+                    Write-Host "`t`t`t`t- Uploader fil..`t$link"; Start-Sleep -S 3
+                    $file = Get-Item $filename;
                     $link = (Invoke-WebRequest -Method PUT -InFile $file.FullName -Uri https://transfer.sh/$($file.Name)).Content
                     ((Get-Content -path $script -Raw) -replace 'https://transfer.sh/kode/brugere.csv', $link ) | Set-Content -Path $script
-                    write "Filen er uploaded til sygehusets filserver:`t$link" 
-                    Set-Clipboard -Value $link
-                    if($link -match ".ps1$")
-                        {write-host "script execution:`tiex ((New-Object System.Net.WebClient).DownloadString('$link'))"}}
+                    write "`t`t`t`t- Uploaded til filserver:`t$link"; Start-Sleep -s 3;
+                    Set-Clipboard -Value $link}
                     Start-Sleep -s 3; upload $csv; Start-Sleep -s 2;
-                    Write-host "customizing script"
+                    Write-host "`t`t`t`t- Konfigurer serverscript.."; Start-Sleep -S 3
                     
                     # Vis CSV
                         Do {
-                            Write-Host "Vil du se CSV filen? (y/n)" -nonewline;
+                            Write-Host "`t`t`t`t- Vil du se CSV filen? (y/n)" -nonewline;
                             $Readhost = Read-Host " " 
                                 Switch ($ReadHost) { 
-                                Y {Notepad $csv} 
+                                Y {
+                                    Write-Host "`t`t`t`t`t- Åbner CSV fil"
+                                    Notepad $csv
+                                    Wait-Process -Name "notepad"
+                                    Write-Host "`t`t`t`t`t- Sletter lokal fil"
+                                    Start-Sleep -S 3
+                                    Remove-Item -Path $csv -Force
+                                    Write-Host "`t`t`t`t`t- Lokal fil Slettet"
+                                    Start-Sleep -S 1
+                                } 
                                 N {} 
                         } } While($Readhost -notin "y", "n")
+                
                 } 
             N {
                 # Indtast CSV fil direkte link 
@@ -219,7 +234,11 @@ Do {
                 }}}
                 While($Answer -notin "y", "n")
 
-Write-host
+        write-host "`t`teksekverer ansible script:"
+        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml"
+        Start-Sleep -s 5
+        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit DC
+        Start-Sleep -s 5
 }
     
 
