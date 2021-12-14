@@ -152,7 +152,9 @@ $appheader =
             sleep -s 5
             } #klient funcktion slut
 
+function klientautomatisering{
 
+}
         
 
 $intro = 
