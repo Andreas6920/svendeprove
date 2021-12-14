@@ -79,7 +79,7 @@
         
             Write-host "`t`t`t- Opretter"$fornavn" "$efternavn" til $afdeling afdelingen" -f green
                 New-ADUser -Path $ou -Department $afdeling -Name $Name -Title $title  -UserPrincipalName $username$maildomain -DisplayName $username `
-                -GivenName $fornavn -Surname $efternavn -Company $company -Office $office -AccountPassword (ConvertTo-SecureString "Pa55w.rd" -AsPlainText -Force) -PassThru| Enable-ADAccount}
+                -GivenName $fornavn -Surname $efternavn -Company $company -Office $office -AccountPassword (ConvertTo-SecureString "Pa55w.rd" -AsPlainText -Force -ErrorAction Ignore) -PassThru| Enable-ADAccount} 
             
             Start-sleep -s 5
 
