@@ -13,7 +13,7 @@
             Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Type DWord -Value 1
 
     Write-host "`t- Downloader CSV fil:" -f white 
-        $csv_link = "https://transfer.sh/Rhtjfl/bruger2.csv"
+        $csv_link = "https://transfer.sh/kode/brugere.csv"
         $csv_location =  "C:\csvfile\adusers.csv"
         Write-host "`t`t- Klargøre mappe til fil.." -f green
         mkdir (Split-Path $csv_location -Parent) -Force | Out-Null
