@@ -237,7 +237,7 @@ Do {
         write-host "`t`teksekverer ansible script:" -f green
         write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml" -f green
         Start-Sleep -s 5
-        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit dc
+        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcakut
         Start-Sleep -s 5
 }
     
