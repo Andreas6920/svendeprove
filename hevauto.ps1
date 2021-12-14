@@ -191,14 +191,14 @@ Do {
                     function upload ($filename)
                     {$file = Get-Item $filename;
                     $link = (Invoke-WebRequest -Method PUT -InFile $file.FullName -Uri https://transfer.sh/$($file.Name)).Content
+                    ((Get-Content -path $script -Raw) -replace 'https://transfer.sh/kode/brugere.csv', $link ) | Set-Content -Path $script
                     write "Filen er uploaded til sygehusets filserver:`t$link" 
                     Set-Clipboard -Value $link
                     if($link -match ".ps1$")
-                        {write-host "script execution:`tiex ((New-Object System.Net.WebClient).DownloadString('$link'))"}
-                    }
+                        {write-host "script execution:`tiex ((New-Object System.Net.WebClient).DownloadString('$link'))"}}
                     Start-Sleep -s 3; upload $csv; Start-Sleep -s 2;
                     Write-host "customizing script"
-                    ((Get-Content -path $script -Raw) -replace 'https://transfer.sh/kode/brugere.csv', "$link" ) | Set-Content -Path $script
+                    
                     # Vis CSV
                         Do {
                             Write-Host "Vil du se CSV filen? (y/n)" -nonewline;
