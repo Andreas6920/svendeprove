@@ -146,9 +146,9 @@ $appheader =
 
 
         write-host "`t`teksekverer ansible script:"
-        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcakut"
+        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcdrift"
         Start-Sleep -s 5
-        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcakut
+        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcdrift
         Start-Sleep -s 5
         } #klient funcktion slut
 
