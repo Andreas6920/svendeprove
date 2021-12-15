@@ -154,7 +154,7 @@ $appheader =
 
 function Serverautomatisering{
 #Downloader script
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/powershellscripts/serverautomatisering.ps1" -OutFile $script
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Andreas6920/svendeprove/main/powershellscripts/serverautomatisering2.ps1" -OutFile $script
 
 #CSV fil
 Do {
