@@ -240,6 +240,18 @@ Do {
         wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit dc
         Start-Sleep -s 5
 }
+
+netvaerksautomatisering {
+    Write-host "`t`tBanner configuration:" -f green 
+    Write-host "`t`t`t- Hvad skal der stå?" -NoNewline
+    $banner = Read-host " "
+    $before = "C:\ProgramData\Ansible\templates\banner.yml"
+    $after = "C:\ProgramData\Ansible\Scripts\banner.yml"
+    Copy-item -path $before -Destination $after -Force
+    ((Get-Content -path $after -Raw) -replace 'test123', $banner ) | Set-Content -Path $after
+
+
+}
     
 
 $intro = 
