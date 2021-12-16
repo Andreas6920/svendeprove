@@ -248,7 +248,7 @@ Do {
         Start-Sleep -s 5
 }
 
-netvaerksautomatisering {
+function netvaerksautomatisering {
     Write-host "`t`tBanner configuration:" -f green 
     Write-host "`t`t`t- Hvad skal der stå?" -NoNewline
     $banner = Read-host " "
@@ -257,6 +257,25 @@ netvaerksautomatisering {
     Copy-item -path $before -Destination $after -Force
     ((Get-Content -path $after -Raw) -replace 'test123', $banner ) | Set-Content -Path $after
 
+
+    Write-Host "`t`t`tKonfigurationen er komplet!`n`n" -f yellow; Start-Sleep -S 2
+        Write-Host "`t`t`tHvilke(n) host ønsker du at implementere denne på?" -NoNewline; Start-Sleep -S 1;
+        
+        "";
+        write-host "`t`t`tswdrift" -f yellow
+        write-host "`t`t`t`t`t`tSW01DRI.hev.rm.local`t`tSW02DRI.hev.rm.local" -f green
+        write-host "`t`t`t`t`t`tSW03DRI.hev.rm.local`t`tSW04DRI.hev.rm.local" -f green
+        write-host "`t`t`t`t`t`tSW05DRI.hev.rm.local`t`tSW06DRI.hev.rm.local" -f green
+        write-host "`t`t`t`t`t`tSW07DRI.hev.rm.local`t`tSW08DRI.hev.rm.local" -f green
+        Write-Host "`t`t`tHost" -NoNewline; Start-Sleep -S 1
+        $klient = Read-host " "
+        "";"";
+
+    write-host "`t`teksekverer ansible script:" -f green
+    write-host "`t`twsl ansible-playbook ansible-playbook /mnt/c/programdata/Ansible/scripts/banner.yml --limit " -f green
+    Start-Sleep -s 5
+    wsl ansible-playbook /mnt/c/programdata/Ansible/scripts/banner.yml
+    Start-Sleep -s 5
 
 }
     
@@ -297,7 +316,7 @@ do {
         0 {}
         1 { klientautomatisering; }
         2 { Serverautomatisering; }
-        3 { Netværksautomatisering; }
+        3 { netvaerksautomatisering; }
         Default { cls; Write-host""; Write-host""; Write-host "INVALID OPTION. TRY AGAIN.." -f red; Write-host""; Write-host""; Start-Sleep 1; cls; Write-host ""; Write-host "" } }
      
     }while ($option -ne 0)}
