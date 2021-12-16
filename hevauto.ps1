@@ -142,12 +142,20 @@ $appheader =
             Y {Write-Host "`t`t`t`t- taskbaren bliver unpinned."; echo (Invoke-WebRequest -Uri "https://geany.org/p/p1ipE/raw/").Content >> $script; Start-Sleep -s 1}
             N { Write-Host "NEJ. dette modul bliver skippet" -f Red } 
         }} While ($answer -notin "y", "n") 
-
-
+        Write-Host "`t`t`tKonfigurationen er komplet!`n`n" -f yellow; Start-Sleep -S 2
+        Write-Host "`t`t`tHvilke(n) host ønsker du at implementere denne på?" -NoNewline; Start-Sleep -S 1;
+        
+        "";
+        write-host "`t`t`tpcdrift" -f yellow
+        write-host "`t`t`t`t`t`tD0005.HEV.RM.LOCAL`t`tD0006.HEV.RM.LOCAL`t`t" -f green
+        write-host "`t`t`t`t`t`tD0007.HEV.RM.LOCAL`t`tD0008.HEV.RM.LOCAL`t`t" -f green
+        Write-Host "`t`t`tHost" -NoNewline; Start-Sleep -S 1
+        $klient = Read-host " "
+        "";"";
         write-host "`t`teksekverer ansible script:"
-        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcdrift"
+        write-host "`t`twsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit $klient"
         Start-Sleep -s 5
-        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit pcdrift
+        wsl ansible-playbook /mnt/c/ProgramData/Ansible/scripts/createdirdownloadexe.yml --limit $klient
         Start-Sleep -s 5
         } #klient funcktion slut
 
