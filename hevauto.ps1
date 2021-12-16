@@ -269,8 +269,9 @@ function netvaerksautomatisering {
         write-host "`t`t`t`t`t`tSW07DRI.hev.rm.local`t`tSW08DRI.hev.rm.local" -f green
         Write-Host "`t`t`tHost" -NoNewline; Start-Sleep -S 1
         $klient = Read-host " "
-        "";"";
         ((Get-Content -path $after -Raw) -replace 'SW08DRI.hev.rm.local', $klient ) | Set-Content -Path $after
+        "";"";
+        
 
 
     
