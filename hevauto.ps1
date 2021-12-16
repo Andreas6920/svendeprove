@@ -37,35 +37,34 @@ $appheader =
 " 
     
         Write-host $appheader -f Yellow 
-        write-host "    BROWSER:" -f yellow
-        write-host "        Chrome        Firefox      Opera" -f green
-        write-host "        Brave         Opera        Vevaldi" -f green
+        write-host "    Standard:" -f yellow
+        write-host "        Chrome       Adobe Reader    Microsoft Teams" -f green
+        write-host "        Office365" -f green
         "";
-        write-host "    TOOLS:" -f yellow
-        write-host "        Dropbox       Google Drive    Teamviewer" -f green
-        write-host "        7-zip         Winrar          Greenshot" -f green
-        write-host "        ShareX        Gimp            Visual studio++" -f green
+        write-host "    Browsere:" -f yellow
+        write-host "        Firefox      Vivaldi         Opera" -f green
+        write-host "        Brave        LibreWolf" -f green
         "";
-        write-host "    MEDIA PLAYER:" -f yellow
-        write-host "        Spotify       VLC           Itunes" -f green
-        write-host "        Winamp        Foobar2000    K-Lite" -f green
-        write-host "        MPC-HC        Popcorntime         " -f green
+        write-host "    Redskaber:" -f yellow
+        write-host "        ShareX        Spotify     Visual studio++" -f green
+        write-host "        Greenshot     Gimp        VLC" -f green
+        write-host "        WinRAR        PowerIso" -f green
         "";
-        write-host "    Development:" -f yellow
+        write-host "    Udvikling:" -f yellow
         write-host "        Notepad++       vscode           atom" -f green
         write-host "        Vim             Eclipse          PyCharm" -f green
         write-host "        PuTTY           Superputty       TeraTerm" -f green
         write-host "        Filezilla       WinSCP           mRemoteNG" -f green
         write-host "        Wireshark       git              Github Desktop" -f green
         "";
-        write-host "    Social:" -f yellow
-        write-host "        Webex           Zoom           Microsoft Teams" -f green
-        write-host "        Discord         Twitch         Ubisoft-Connect" -f green
-        write-host "        Steam" -f green
+        write-host "    Andet:" -f yellow
+        write-host "        Spotify       VLC           Itunes" -f green
+        write-host "        Winamp        Foobar2000    K-Lite" -f green
+        write-host "        MPC-HC" -f green
         "";
-        Write-host "    ** List multiple programs seperated by , (comma) - spaces are allowed." -f yellow;
+        Write-host "    ** Angiv flere af disse ved at separere dem med , (comma) - mellemrum tilladt." -f yellow;
         "";
-        Write-host "`t`tType the programs you would like to be installed on this system" -nonewline; 
+        Write-host "    ØNSKEDE SOFTWARE" -f yellow -nonewline; 
         $requested_apps = (Read-Host " ").Split(",") | Foreach-object { $_ -replace ' ',''}
         foreach ($requested_app in $requested_apps) {
 
@@ -76,8 +75,8 @@ $appheader =
         elseif("Opera" -match "$requested_app"){Write-host "`t`t`t`t- adding Opera.." -f yellow; Start-Sleep -s 1; echo 'choco install opera -y' >> $script;} 
         elseif("Vivaldi" -match "$requested_app"){Write-host "`t`t`t`t- adding Vivaldi.." -f yellow; Start-Sleep -s 1; echo 'choco install Vivaldi -y' >> $script;} 
 
-        elseif("Dropbox" -match "$requested_app"){Write-host "`t`t`t`t- adding Dropbox.." -f yellow; Start-Sleep -s 1; echo 'choco install dropbox -y' >> $script;} 
-        elseif("Google Drive" -match "$requested_app"){Write-host "`t`t`t`t- adding Google Drive.." -f yellow; Start-Sleep -s 1; echo 'choco install googledrive -y' >> $script;} 
+        elseif("Adobe Reader" -match "$requested_app"){Write-host "`t`t`t`t- adding Adobe Reader.." -f yellow; Start-Sleep -s 1; echo 'choco install choco install adobereader -y' >> $script;} 
+        elseif("Office365" -match "$requested_app"){Write-host "`t`t`t`t- adding Office365.." -f yellow; Start-Sleep -s 1; echo 'choco install office365business -y' >> $script;} 
         elseif("TeamViewer" -match "$requested_app"){Write-host "`t`t`t`t- adding TeamViewer.." -f yellow; Start-Sleep -s 1;echo 'choco install TeamViewer -y' >> $script;} 
         elseif("7-zip" -match "$requested_app"){Write-host "`t`t`t`t- adding 7-Zip.." -f yellow; Start-Sleep -s 1; echo 'choco install 7Zip -y' >> $script;} 
         elseif("winrar" -match "$requested_app"){Write-host "`t`t`t`t- adding Winrar.." -f yellow; Start-Sleep -s 1; echo 'choco install winrar -y' >> $script;} 
