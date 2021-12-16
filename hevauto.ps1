@@ -270,9 +270,12 @@ function netvaerksautomatisering {
         Write-Host "`t`t`tHost" -NoNewline; Start-Sleep -S 1
         $klient = Read-host " "
         "";"";
+        ((Get-Content -path $after -Raw) -replace 'SW08DRI.hev.rm.local', $klient ) | Set-Content -Path $after
 
+
+    
     write-host "`t`teksekverer ansible script:" -f green
-    write-host "`t`twsl ansible-playbook ansible-playbook /mnt/c/programdata/Ansible/scripts/banner.yml --limit " -f green
+    write-host "`t`twsl ansible-playbook ansible-playbook /mnt/c/programdata/Ansible/scripts/banner.yml" -f green
     Start-Sleep -s 5
     wsl ansible-playbook /mnt/c/programdata/Ansible/scripts/banner.yml
     Start-Sleep -s 5
