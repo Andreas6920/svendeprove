@@ -58,8 +58,8 @@
     if($count -le 9){$username = $Part1+"0"+$count}
     else{$username = $Part1+$count}
     New-ADUser -Path $ou -Department $afdeling -Title $title -Name $username -UserPrincipalName $username$maildomain -DisplayName $username `
-    -GivenName $fornavn -Surname $efternavn -Company $company -Office $office -AccountPassword (ConvertTo-SecureString "Pa55w.rd" -AsPlainText -Force) -PassThru| Enable-ADAccount}
-    Write-host "`t`t`t`t- Bruger navngivet $username istedet!" -f green
+    -GivenName $fornavn -Surname $efternavn -Company $company -Office $office -AccountPassword (ConvertTo-SecureString "Pa55w.rd" -AsPlainText -Force) -PassThru| Enable-ADAccount; Write-host "`t`t`t`t- Bruger navngivet $username istedet!" -f yellow}
+    Write-host "`t`t`t`t- Bruger navngivet: $username" -f green
 
     }
 
